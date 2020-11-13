@@ -1,9 +1,10 @@
 package com.example.cemeterytracker
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -13,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
@@ -27,20 +29,30 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
+
+
+
+
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.homeFragment,
+                setOf(
+                        R.id.homeFragment,
 
-            ), drawerLayout
+                        ), drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration) //the most important part
         navView.setupWithNavController(navController) //the second most important part
 
         //other things unrelated
+
+        val drawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

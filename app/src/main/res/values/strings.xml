@@ -21,4 +21,17 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="cemeteries_you_have_added">Cemeteries you have added</string>
+    <string name="all_cemeteries">All Cemeteries</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="name_hint">Enter cemetery name</string>
+    <string name="location_hint">Enter location</string>
+    <string name="state_hint">Enter state</string>
+    <string name="county_hint">Enter county</string>
+    <string name="township_hint">Enter township</string>
+    <string name="rang_hint">Enter range</string>
+    <string name="section_hint">Enter section</string>
+    <string name="firstyear_hint">Enter first year</string>
+    <string name="spot_hint">Enter spot</string>
 </resources>

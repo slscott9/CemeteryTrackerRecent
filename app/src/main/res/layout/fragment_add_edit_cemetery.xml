@@ -5,30 +5,211 @@
     tools:context=".ui.addedit.cemetery.AddEditCemeteryFragment">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/csAddEditCemetery"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.CollapsingToolbarLayout
+        android:id="@+id/add_edit_cem_toolbar_layou"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|snap"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:toolbarId="@id/toolbar">
 
-
-        <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/add_edit_cem_toolbar"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/addEditCemToolbar"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary" />
-
-        </com.google.android.material.appbar.AppBarLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="parallax"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            app:title="Cemetery">
 
 
+        </com.google.android.material.appbar.MaterialToolbar>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:layout_anchor="@id/add_edit_cem_toolbar_layou">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/csAddEditCemetery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/name_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/locationEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/nameEtLayout"
+                app:layout_constraintStart_toStartOf="@+id/nameEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/nameEtLayout"
+                app:startIconDrawable="@drawable/ic_baseline_add_location_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/location_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/stateEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/locationEtLayout"
+                app:layout_constraintStart_toStartOf="@+id/locationEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/locationEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etState"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/state_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/countyEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/stateEtLayout"
+                app:layout_constraintStart_toStartOf="@id/stateEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/stateEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCounty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/county_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/townshipEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/countyEtLayout"
+                app:layout_constraintStart_toStartOf="@id/countyEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/countyEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTownship"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/township_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rangeEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/townshipEtLayout"
+                app:layout_constraintStart_toStartOf="@id/townshipEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/townshipEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRange"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/rang_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sectionEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/rangeEtLayout"
+                app:layout_constraintStart_toStartOf="@id/rangeEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/rangeEtLayout">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/section_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/firstYearEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/sectionEtLayout"
+                app:layout_constraintStart_toStartOf="@id/sectionEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/sectionEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/firstyear_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/spotEtLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/firstYearEtLayout"
+                app:layout_constraintStart_toStartOf="@id/firstYearEtLayout"
+                app:layout_constraintTop_toBottomOf="@id/firstYearEtLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSpot"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/spot_hint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 
 </layout>
