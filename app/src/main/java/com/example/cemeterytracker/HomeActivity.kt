@@ -56,7 +56,7 @@ class HomeActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment, R.id.registerFragment, R.id.homeLoginFragment, R.id.addEditCemeteryFragment -> {
+                R.id.loginFragment, R.id.registerFragment, R.id.homeLoginFragment, R.id.addEditCemeteryFragment , R.id.cemDetailFragment-> {
                     toolbar?.visibility = View.GONE
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }

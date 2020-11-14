@@ -2,11 +2,15 @@ package com.example.cemeterytracker.data.repository
 
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.LiveData
+import com.example.cemeterytracker.data.database.entities.Cemetery
+import com.example.cemeterytracker.data.database.entities.CemeteryGraves
 import com.example.cemeterytracker.data.dto.UserRequest
 import com.example.cemeterytracker.data.local.LocalDataSource
 import com.example.cemeterytracker.data.remote.RemoteDataSource
 import com.example.cemeterytracker.other.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
@@ -41,5 +45,19 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getCemWithId(cemId: Long): LiveData<Cemetery> {
+        return localDataSource.getCemWithId(cemId)
+    }
 
+    override suspend fun insertCemetery(cemetery: Cemetery): Long {
+        return localDataSource.insertCemetery(cemetery)
+    }
+
+    override fun getCemWithGraves(cemId: Long): LiveData<CemeteryGraves> {
+        return localDataSource.getCemWithGraves(cemId)
+    }
+
+    override fun getAllCemeteries(): Flow<List<Cemetery>> {
+        return localDataSource.getAllCemeteries()
+    }
 }

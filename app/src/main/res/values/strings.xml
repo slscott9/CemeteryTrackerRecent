@@ -34,4 +34,13 @@
     <string name="section_hint">Enter section</string>
     <string name="firstyear_hint">Enter first year</string>
     <string name="spot_hint">Enter spot</string>
+    <string name="established">"Established: "</string>
+    <string name="location">location</string>
+    <string name="add">add</string>
+    <string name="section">Section: </string>
+    <string name="spot">Spot: </string>
+    <string name="range">Range: </string>
+    <string name="state">State: </string>
+    <string name="county">County: </string>
+    <string name="township">Township: </string>
 </resources>

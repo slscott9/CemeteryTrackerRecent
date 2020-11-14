@@ -1,5 +1,6 @@
 package com.example.cemeterytracker.data.remote
 
+import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.dto.UserRequest
 import com.example.cemeterytracker.data.dto.responses.ServerResponse
 import com.example.cemeterytracker.network.CemeteryApi
@@ -18,4 +19,7 @@ class RemoteDataSourceImpl @Inject constructor(
 
     override suspend fun register(userRequest: UserRequest): ServerResponse =
         apiRequest { cemeteryApi.register(userRequest) }
+
+
+
 }

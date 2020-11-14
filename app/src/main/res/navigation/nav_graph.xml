@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addEditCemeteryFragment2"
             app:destination="@id/addEditCemeteryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cemDetailFragment"
+            app:destination="@id/cemDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEditCemeteryFragment"
@@ -59,10 +62,21 @@
             android:name="editFlag"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_addEditCemeteryFragment_to_cemDetailFragment"
+            app:destination="@id/cemDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEditGraveFragment"
         android:name="com.example.cemeterytracker.ui.addedit.grave.AddEditGraveFragment"
         android:label="fragment_add_edit_grave"
         tools:layout="@layout/fragment_add_edit_grave" />
+    <fragment
+        android:id="@+id/cemDetailFragment"
+        android:name="com.example.cemeterytracker.ui.detail.cemdetail.CemDetailFragment"
+        android:label="CemDetailFragment" >
+        <argument
+            android:name="cemId"
+            app:argType="long" />
+    </fragment>
 </navigation>
