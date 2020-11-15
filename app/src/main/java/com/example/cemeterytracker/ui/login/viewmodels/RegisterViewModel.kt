@@ -9,6 +9,7 @@ import com.example.cemeterytracker.data.dto.UserRequest
 import com.example.cemeterytracker.data.repository.Repository
 import com.example.cemeterytracker.other.Resource
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class RegisterViewModel @ViewModelInject constructor(
     private val repository: Repository
@@ -19,6 +20,8 @@ class RegisterViewModel @ViewModelInject constructor(
     val registerStatus: LiveData<Resource<String>> = _registerStatus
 
     fun register(userEmail: String, userName: String, password : String) {
+
+        Timber.i("username is $userName, password is $password, email is $userEmail")
 
         _registerStatus.postValue(Resource.loading(null))
 

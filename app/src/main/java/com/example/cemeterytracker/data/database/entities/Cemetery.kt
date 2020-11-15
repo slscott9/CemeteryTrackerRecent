@@ -1,13 +1,11 @@
 package com.example.cemeterytracker.data.database.entities
 
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Relation
+import androidx.room.*
 import com.google.gson.annotations.Expose
 import java.util.*
 
 @Entity(tableName = "cemetery_tracker_table")
+
 data class
 Cemetery(
 

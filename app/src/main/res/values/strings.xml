@@ -43,4 +43,14 @@
     <string name="state">State: </string>
     <string name="county">County: </string>
     <string name="township">Township: </string>
+    <string name="first">Enter first name</string>
+    <string name="last">Enter last name</string>
+    <string name="birth_date">Enter birth date</string>
+    <string name="death_date">Enter death date</string>
+    <string name="married">Enter marriage year</string>
+    <string name="grave_number">Enter grave number</string>
+    <string name="comment">Enter comment</string>
+    <string name="delete">delete</string>
+    <string name="send">send</string>
+    <string name="edit">edit</string>
 </resources>

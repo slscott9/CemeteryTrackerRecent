@@ -7,10 +7,17 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.CemeteryGraves
+import com.example.cemeterytracker.data.database.entities.Grave
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CemeteryDao {
+
+
+//get cems with graves
+
+    @Query("select * from cemetery_tracker_table where isSynced = :synced")
+    suspend fun getAllCemsWithGraves(synced: Boolean) : List<CemeteryGraves>
 
 //insert cemetery
 
@@ -28,4 +35,15 @@ interface CemeteryDao {
 
     @Query("select * from cemetery_tracker_table")
     fun getAllCemeteries() : Flow<List<Cemetery>>
+
+
+//Insert Grave
+
+    @Insert
+    suspend fun insertGrave(grave: Grave) : Long
+
+    //get  grave
+
+    @Query("select * from grave_tracker_table where graveId =:graveId")
+    fun getGraveWithId(graveId: Long) : LiveData<Grave>
 }

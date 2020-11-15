@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.CemeteryGraves
+import com.example.cemeterytracker.data.database.entities.Grave
 import com.example.cemeterytracker.data.dto.UserRequest
 import com.example.cemeterytracker.data.local.LocalDataSource
 import com.example.cemeterytracker.data.remote.RemoteDataSource
@@ -59,5 +60,20 @@ class RepositoryImpl @Inject constructor(
 
     override fun getAllCemeteries(): Flow<List<Cemetery>> {
         return localDataSource.getAllCemeteries()
+    }
+
+
+
+//Grave
+
+    override suspend fun insertGrave(grave: Grave): Long {
+        return localDataSource.insertGrave(grave)
+    }
+
+
+    //get grave
+
+    override fun getGraveWithId(graveId: Long): LiveData<Grave> {
+        return localDataSource.getGraveWithId(graveId)
     }
 }

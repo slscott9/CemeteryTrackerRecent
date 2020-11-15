@@ -28,6 +28,12 @@ data class DomainGrave(
 
 )
 
+fun Grave.asDomainGrave() : Grave {
+    return Grave(
+            graveId, cemeteryId, firstName, lastName, birthDate, deathDate, marriageYear, comment, graveNumber, isSynced, addedBy
+    )
+}
+
 fun List<Grave>.asDomainGraveList() : List<DomainGrave>{
     return map {
         DomainGrave(

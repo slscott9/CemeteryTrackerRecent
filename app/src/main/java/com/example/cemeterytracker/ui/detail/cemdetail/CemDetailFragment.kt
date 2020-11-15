@@ -41,10 +41,8 @@ class CemDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cemDetailToolbar.setNavigationOnClickListener {
-            findNavController().navigate(R.id.homeFragment)
-        }
 
+        setupListeners()
 
         binding.cemeteryDetailViewModel = viewModel
 
@@ -52,7 +50,7 @@ class CemDetailFragment : Fragment() {
         viewModel.setCemId(cemDetailFragmentArgs.cemId)
 
         graveListAdapter = GraveListAdapter(GraveListAdapter.GraveListListener {
-
+            findNavController().navigate(CemDetailFragmentDirections.actionCemDetailFragmentToGraveDetailFragment(it))
         })
 
 
@@ -68,6 +66,17 @@ class CemDetailFragment : Fragment() {
             adapter = graveListAdapter
             layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }
+    }
+
+    private fun setupListeners() {
+        binding.addGraveChip.setOnClickListener {
+            findNavController().navigate(CemDetailFragmentDirections.actionCemDetailFragmentToAddEditGraveFragment(cemId = cemDetailFragmentArgs.cemId))
+        }
+
+        binding.cemDetailToolbar.setNavigationOnClickListener {
+            findNavController().navigate(R.id.homeFragment)
+        }
+
     }
 
 

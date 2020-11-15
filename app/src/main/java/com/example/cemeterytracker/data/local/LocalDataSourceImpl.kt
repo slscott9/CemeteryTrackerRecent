@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.cemeterytracker.data.database.CemeteryDao
 import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.CemeteryGraves
+import com.example.cemeterytracker.data.database.entities.Grave
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -27,5 +28,17 @@ class LocalDataSourceImpl @Inject constructor(
 
     override fun getAllCemeteries(): Flow<List<Cemetery>> {
         return dao.getAllCemeteries()
+    }
+
+
+
+    //Graves
+
+    override suspend fun insertGrave(grave: Grave): Long {
+        return dao.insertGrave(grave)
+    }
+
+    override fun getGraveWithId(graveId: Long): LiveData<Grave> {
+        return dao.getGraveWithId(graveId)
     }
 }
