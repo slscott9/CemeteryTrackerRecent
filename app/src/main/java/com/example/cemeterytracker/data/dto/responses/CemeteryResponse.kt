@@ -8,12 +8,12 @@ import com.example.cemeterytracker.data.dto.GraveDto
 import com.example.cemeterytracker.data.dto.asNetworkGraves
 
 data class CemeteryResponse(
-    val cemeteryId: Long,
+    val id: Long,
     val name: String,
     val location: String,
     val state: String,
     val county: String,
-    val township: String,
+    val townShip: String,
     val range: String,
     val spot: String,
     val firstYear: String,
@@ -25,9 +25,49 @@ data class CemeteryResponse(
 
 )
 
+fun List<CemeteryGraves>.asCemeterResponses() : List<CemeteryResponse>{
+    return map {
+        CemeteryResponse(
+                id = it.cemetery.cemeteryId,
+                name = it.cemetery.name,
+                location = it.cemetery.location,
+                state = it.cemetery.state,
+                county = it.cemetery.county,
+                townShip = it.cemetery.township,
+                range = it.cemetery.range,
+                spot = it.cemetery.spot,
+                firstYear = it.cemetery.firstYear,
+                section = it.cemetery.section,
+                synced = it.cemetery.isSynced,
+                graveCount = it.cemetery.graveCount,
+                addedBy = it.cemetery.addedBy,
+                graves = it.graves.asGraveResponses()
+
+                )
+    }
+}
+
+fun List<Grave>.asGraveResponses() : List<GraveResponse>{
+    return map {
+        GraveResponse(
+                graveId = it.graveId,
+                cemetery = it.cemeteryId,
+                firstName = it.firstName,
+                lastName = it.lastName,
+                birthDate = it.birthDate,
+                deathDate = it.deathDate,
+                marriageYear = it.marriageYear,
+                comment = it.comment,
+                graveNumber = it.graveNumber,
+                synced = it.isSynced,
+                addedBy = it.addedBy
+        )
+    }
+}
+
 data class GraveResponse(
     val graveId: Long,
-    val cemeteryId: Long,
+    val cemetery: Long,
     val firstName: String,
     val lastName: String,
     val birthDate: String,
@@ -35,27 +75,32 @@ data class GraveResponse(
     val marriageYear: String,
     val comment: String,
     val graveNumber: String,
-    var synched: Boolean,
+    var synced: Boolean,
     val addedBy: String
 )
 
 fun CemeteryResponse.asDatabaseCemetery() : Cemetery {
     return Cemetery(
         name = name,
-        cemeteryId = cemeteryId,
+        cemeteryId = id,
         location = location,
         state = state,
         county = county,
-        township = township,
+        township = townShip,
         range = range,
         spot = spot,
         firstYear = firstYear,
         section = section,
         isSynced = synced,
         graveCount = graveCount,
-        addedBy = addedBy
+        addedBy = addedBy,
+            newCemetery = false
     )
 }
+
+
+
+
 
 fun List<CemeteryResponse>.asDataBaseModel() : List<CemeteryGraves> {
     return map {
@@ -72,7 +117,7 @@ fun List<GraveResponse>.asDatabaseGraves() : List<Grave>{
     return map {
         Grave(
             graveId = it.graveId,
-            cemeteryId = it.cemeteryId,
+            cemeteryId = it.cemetery,
             firstName = it.firstName,
             lastName = it.lastName,
             birthDate = it.birthDate,
@@ -80,7 +125,7 @@ fun List<GraveResponse>.asDatabaseGraves() : List<Grave>{
             marriageYear = it.marriageYear,
             comment = it.comment,
             graveNumber = it.graveNumber,
-            isSynced = it.synched,
+            isSynced = it.synced,
             addedBy = it.addedBy
         )
     }

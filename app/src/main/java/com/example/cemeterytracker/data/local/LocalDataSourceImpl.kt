@@ -12,6 +12,9 @@ class LocalDataSourceImpl @Inject constructor(
     private val dao: CemeteryDao
 ) : LocalDataSource {
 
+    override suspend fun getNewCemeteries(): List<CemeteryGraves> {
+        return dao.getNewCemeteries(true)
+    }
 
     //insert local cemetery
     override suspend fun insertCemetery(cemetery: Cemetery) : Long{
@@ -30,8 +33,30 @@ class LocalDataSourceImpl @Inject constructor(
         return dao.getAllCemeteries()
     }
 
+    override suspend fun getUnsyncedCems(): List<CemeteryGraves> {
+        return dao.getUnsyncedCems(false, newCem = false)
+    }
 
+    override suspend fun insertSyncedCems(syncedCems: List<CemeteryGraves>) {
+        dao.insertSyncedCems(syncedCems)
+    }
 
+    override suspend fun deleteUnsyncedCems(isSynced: Boolean) {
+        dao.deleteUnsyncedCems(false)
+    }
+
+    override suspend fun clearDb() {
+        dao.clearDb()
+    }
+
+    //Update cemetery
+    override suspend fun getCemetery(cemId: Long): Cemetery {
+        return dao.getCemetery(cemId)
+    }
+
+    override suspend fun updateCemetery(cemetery: Cemetery) {
+        dao.updateCemetery(cemetery)
+    }
     //Graves
 
     override suspend fun insertGrave(grave: Grave): Long {

@@ -120,7 +120,7 @@ class AddEditGraveFragment : Fragment() {
                                 cemeteryId = navArgs.cemId,
                                 addedBy = sharedPreferences.getString(Constants.NO_USERNAME, Constants.NO_USERNAME).toString()
                         )
-                viewModel.insertGrave(grave)
+                viewModel.insertGrave(grave, navArgs.cemId)
             }
         }
     }

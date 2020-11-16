@@ -23,36 +23,38 @@
                 android:id="@+id/tvUserCemsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="@string/cemeteries_you_have_added"
-                android:textSize="24sp"
                 android:textStyle="bold"
+                android:textSize="24sp"
                 tools:text="Cemeteries you have added" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUsersAddedCems"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="8dp"
                 android:layout_marginBottom="32dp"
-                android:layout_weight="1"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
                 android:id="@+id/tvAllCemsTitle"
+                android:textSize="24sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="@string/all_cemeteries"
-                android:textSize="24sp"
                 android:textStyle="bold"
                 tools:text="All Cemeteries" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAllCems"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
         </LinearLayout>

@@ -6,13 +6,18 @@ import androidx.lifecycle.LiveData
 import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.CemeteryGraves
 import com.example.cemeterytracker.data.database.entities.Grave
+import com.example.cemeterytracker.data.dto.CemeteryDto
 import com.example.cemeterytracker.data.dto.UserRequest
+import com.example.cemeterytracker.data.dto.responses.CemeteryResponse
+import com.example.cemeterytracker.data.dto.responses.ServerResponse
+import com.example.cemeterytracker.data.dto.update.CemeteryUpdate
 import com.example.cemeterytracker.data.local.LocalDataSource
 import com.example.cemeterytracker.data.remote.RemoteDataSource
 import com.example.cemeterytracker.other.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -46,6 +51,10 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun getNewCemeteries(): List<CemeteryGraves> {
+        return localDataSource.getNewCemeteries()
+    }
+
     override fun getCemWithId(cemId: Long): LiveData<Cemetery> {
         return localDataSource.getCemWithId(cemId)
     }
@@ -62,9 +71,51 @@ class RepositoryImpl @Inject constructor(
         return localDataSource.getAllCemeteries()
     }
 
+    override suspend fun getUnsyncedCems(): List<CemeteryGraves> {
+        return localDataSource.getUnsyncedCems()
+    }
 
+    override suspend fun insertSyncedCems(syncedCems: List<CemeteryGraves>) {
+        Timber.i("repo insert syned cems called")
+        Timber.i("repo insertSyncedCems list is $syncedCems")
+        localDataSource.insertSyncedCems(syncedCems)
+    }
 
-//Grave
+    override suspend fun deleteUnsyncedCems() {
+        localDataSource.deleteUnsyncedCems(false)
+    }
+
+    override suspend fun clearDb() {
+        localDataSource.clearDb()
+    }
+
+    //update cemetery
+
+    override suspend fun updateCemeteries(cemList: List<CemeteryUpdate>) {
+        Timber.i("updateCemeteries called cems to update are $cemList")
+        remoteDataSource.updateCemeteries(cemList)
+    }
+
+    override suspend fun updateCemetery(cemId: Long) {
+        val cemetery = localDataSource.getCemetery(cemId)
+        cemetery.newCemetery = !cemetery.isSynced
+        cemetery.isSynced = false
+        Timber.i("cemetery.newCemetery = ${cemetery.newCemetery}")
+
+        localDataSource.updateCemetery(cemetery)
+    }
+
+    //Network Cemetery
+    override suspend fun sendNewCems(cemList: List<CemeteryDto>): ServerResponse {
+        Timber.i("sendNewCems called new cems are $cemList")
+        return remoteDataSource.addCems(cemList)
+    }
+
+    override suspend fun getNetworkCems(): List<CemeteryResponse> {
+        return remoteDataSource.getAllCemeteries()
+    }
+
+    //Grave
 
     override suspend fun insertGrave(grave: Grave): Long {
         return localDataSource.insertGrave(grave)

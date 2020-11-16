@@ -28,16 +28,19 @@ class AddEditGraveViewModel @ViewModelInject constructor(
         _graveId.value = graveId
     }
 
-    fun insertGrave(grave: Grave){
+    fun insertGrave(grave: Grave, cemId: Long){
 
         viewModelScope.launch {
             repository.insertGrave(grave)
+
+            repository.updateCemetery(cemId) //everytime grave is added set cemetery isSynced to false. This allows refresh worker to update a cemetery on server
 
             _graveInsertStatus.postValue(true)
 
 
         }
     }
+
 
 
 }

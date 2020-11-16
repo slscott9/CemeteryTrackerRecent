@@ -160,7 +160,8 @@ class AddEditCemeteryFragment : Fragment() {
                     section = binding.etSection.text.toString(),
                     spot = binding.etSpot.text.toString(),
                     addedBy = sharedPreferences.getString(Constants.KEY_LOGGED_IN_USERNAME, Constants.NO_USERNAME).toString(),
-                    graveCount = 0
+                    graveCount = 0,
+                        newCemetery = true
 
                 )
                 viewModel.insertCemetery(newCem)

@@ -10,7 +10,9 @@ import java.util.*
     ForeignKey(entity = Cemetery::class,
     parentColumns = arrayOf("cemeteryId"),
     childColumns = arrayOf("cemeteryId"),
-    onDelete = ForeignKey.CASCADE)
+            onDelete = ForeignKey.CASCADE
+
+    )
 ))
 data class Grave(
 

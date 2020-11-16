@@ -34,7 +34,9 @@ Cemetery(
 
     val graveCount: Int,
 
-    val addedBy: String
+    val addedBy: String,
+
+    var newCemetery: Boolean
 
 
 
@@ -44,7 +46,7 @@ data class CemeteryGraves(
     @Embedded val cemetery: Cemetery,
     @Relation(
         parentColumn = "cemeteryId",
-        entityColumn = "cemeteryId"
+        entityColumn = "cemeteryId",
     )
     val graves: List<Grave>
 )
