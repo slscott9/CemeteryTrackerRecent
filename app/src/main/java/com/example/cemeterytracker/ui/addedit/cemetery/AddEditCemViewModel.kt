@@ -11,19 +11,19 @@ import kotlinx.coroutines.launch
 
 class AddEditCemViewModel @ViewModelInject constructor(
         private val repository: Repository
-) : ViewModel(){
+) : ViewModel() {
 
 
-        private val _cemId = MutableLiveData<Long>()
-        val cemId: LiveData<Long> = _cemId
+    private val _cemId = MutableLiveData<Long>()
+    val cemId: LiveData<Long> = _cemId
 
 
-        fun insertCemetery(cemetery: Cemetery) {
+    fun insertCemetery(cemetery: Cemetery) {
 
-                viewModelScope.launch {
-                        _cemId.value = repository.insertCemetery(cemetery)
-                }
-
-
+        viewModelScope.launch {
+            _cemId.value = repository.insertCemetery(cemetery)
         }
+
+
+    }
 }

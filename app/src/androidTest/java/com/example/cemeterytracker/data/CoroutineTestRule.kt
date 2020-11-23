@@ -1,4 +1,4 @@
-package com.example.cemeterytracker
+package com.example.cemeterytracker.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -8,8 +8,6 @@ import kotlinx.coroutines.test.setMain
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
-
-//provides main looper for our test that does not have access to it
 @ExperimentalCoroutinesApi
 class CoroutineTestRule(val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
     override fun starting(description: Description?) {

@@ -12,22 +12,22 @@ interface CemeteryDao {
 
     //Get new cemeteries
 
-    @Query("select * from cemetery_tracker_table where newCemetery =:newCem")
+    @Query("select * from cemetery_tracker_table where newCemetery =:newCem") //tested
     suspend fun getNewCemeteries(newCem: Boolean): List<CemeteryGraves>
 
 
 //get cems with graves
 
-    @Query("select * from cemetery_tracker_table where isSynced = :synced and newCemetery =:newCem")
+    @Query("select * from cemetery_tracker_table where isSynced = :synced and newCemetery =:newCem") //tested
     suspend fun getUnsyncedCems(synced: Boolean, newCem: Boolean) : List<CemeteryGraves>
 
 //insert cemetery
 
     @Insert
-    suspend fun insertCemetery(cemetery: Cemetery) : Long
+    suspend fun insertCemetery(cemetery: Cemetery) : Long //tested
 
 
-    @Query("select * from cemetery_tracker_table where cemeteryId = :cemId")
+    @Query("select * from cemetery_tracker_table where cemeteryId = :cemId") //tested
     fun getCemWithId(cemId: Long) : LiveData<Cemetery>
 
     //Update cemetery
@@ -40,7 +40,7 @@ interface CemeteryDao {
 
 
     @Transaction
-    @Query("select * from cemetery_tracker_table where cemeteryId =:cemId")
+    @Query("select * from cemetery_tracker_table where cemeteryId =:cemId") //tested
     fun getCemWithGraves(cemId: Long) : LiveData<CemeteryGraves>
 
 
@@ -48,7 +48,7 @@ interface CemeteryDao {
     fun getAllCemeteries() : Flow<List<Cemetery>>
 
     @Insert
-    suspend fun insertGraveList(graveList : List<Grave>)
+    suspend fun insertGraveList(graveList : List<Grave>) //tested
 
     @Insert
     @Transaction
@@ -60,7 +60,7 @@ interface CemeteryDao {
         }
     }
 
-    @Query("delete from cemetery_tracker_table where isSynced =:isSynced")
+    @Query("delete from cemetery_tracker_table where isSynced =:isSynced") //tested
     suspend fun deleteUnsyncedCems(isSynced: Boolean)
 
     @Query("delete from cemetery_tracker_table")
@@ -70,10 +70,10 @@ interface CemeteryDao {
 //Insert Grave
 
     @Insert
-    suspend fun insertGrave(grave: Grave) : Long
+    suspend fun insertGrave(grave: Grave) : Long //tested
 
     //get  grave
 
-    @Query("select * from grave_tracker_table where graveId =:graveId")
+    @Query("select * from grave_tracker_table where graveId =:graveId") //tested
     fun getGraveWithId(graveId: Long) : LiveData<Grave>
 }

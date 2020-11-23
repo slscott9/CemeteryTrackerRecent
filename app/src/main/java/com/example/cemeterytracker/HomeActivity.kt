@@ -56,14 +56,14 @@ class HomeActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment, R.id.registerFragment, R.id.homeLoginFragment, R.id.addEditCemeteryFragment , R.id.cemDetailFragment, R.id.addEditGraveFragment, R.id.graveDetailFragment-> {
-                    toolbar?.visibility = View.GONE
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                R.id.homeFragment -> {
+                    toolbar?.visibility = View.VISIBLE
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
 
                 else -> {
-                    toolbar?.visibility = View.VISIBLE
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                    toolbar?.visibility = View.GONE
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
             }
         }

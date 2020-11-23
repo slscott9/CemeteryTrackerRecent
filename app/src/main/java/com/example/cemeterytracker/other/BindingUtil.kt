@@ -3,6 +3,7 @@ package com.example.cemeterytracker.other
 import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.Grave
 import com.example.cemeterytracker.data.domain.DomainCemetery
 import com.example.cemeterytracker.data.domain.DomainGrave
@@ -92,6 +93,13 @@ fun TextView.setGraveComment(grave: Grave?){
 @BindingAdapter("setGraveNum")
 fun TextView.setGraveNum(grave: Grave?){
     grave?.graveNumber?.let { text = grave.graveNumber }
+}
+
+@BindingAdapter("setAddedBy")
+fun TextView.setAddedBy(cemetery: Cemetery?){
+    cemetery?.addedBy?.let{
+        text = "Added by: ${cemetery.addedBy}"
+    }
 }
 
 

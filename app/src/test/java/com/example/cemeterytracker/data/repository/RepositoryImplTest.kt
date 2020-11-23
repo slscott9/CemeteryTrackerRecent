@@ -40,8 +40,8 @@ class RepositoryImplTest {
             userName = "newUser",
             email = "newUser@gmail.com",
             password = "password",
-            graveAdded = 0,
-            cemeteriesAdded = 0
+            cemeteriesAdded = 0,
+                gravesAdded = 0
         )
 
         serverResponse = ServerResponse(

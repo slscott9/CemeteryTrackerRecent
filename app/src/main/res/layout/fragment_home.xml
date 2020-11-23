@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.home.HomeFragment">
 
-        <androidx.core.widget.NestedScrollView
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            android:layout_marginTop="64dp"
-            android:fillViewport="true"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+    <androidx.core.widget.NestedScrollView
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
 
         <LinearLayout
@@ -23,10 +23,11 @@
                 android:id="@+id/tvUserCemsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/cemeteries_you_have_added"
-                android:textStyle="bold"
+                android:layout_marginStart="16dp"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 tools:text="Cemeteries you have added" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -40,33 +41,26 @@
 
             <TextView
                 android:id="@+id/tvAllCemsTitle"
-                android:textSize="24sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/all_cemeteries"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 tools:text="All Cemeteries" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvAllCems"
                 android:layout_width="match_parent"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_height="0dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_weight="1" />
 
         </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
-
-
-
-
-
-
-
+    </androidx.core.widget.NestedScrollView>
 
 
 </layout>
