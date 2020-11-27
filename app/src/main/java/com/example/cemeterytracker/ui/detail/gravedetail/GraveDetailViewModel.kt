@@ -12,6 +12,7 @@ class GraveDetailViewModel @ViewModelInject constructor(
 
 
     private val _graveId = MutableLiveData<Long>()
+
     val graveSelected = _graveId.switchMap{
         repository.getGraveWithId(it)
     }
