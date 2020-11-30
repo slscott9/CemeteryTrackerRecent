@@ -109,6 +109,7 @@ object AppModule {
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
         val client = okHttpClient
             .addInterceptor(loggingInterceptor)
             .addInterceptor(basicAuthInterceptor)

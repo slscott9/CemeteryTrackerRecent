@@ -1,5 +1,8 @@
 package com.example.cemeterytracker.ui.detail.cemdetail
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +19,8 @@ import com.example.cemeterytracker.data.domain.asDomainGraveList
 import com.example.cemeterytracker.databinding.FragmentCemDetailBinding
 import com.example.cemeterytracker.ui.adapters.GraveListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.net.URI
 
 @AndroidEntryPoint
 class CemDetailFragment : Fragment() {
@@ -24,6 +29,9 @@ class CemDetailFragment : Fragment() {
     private lateinit var binding: FragmentCemDetailBinding
     private val cemDetailFragmentArgs : CemDetailFragmentArgs by navArgs()
     private lateinit var graveListAdapter: GraveListAdapter
+
+    val CemDetailFragment.packageManager get() = activity?.packageManager
+
 
 
     override fun onCreateView(
@@ -75,6 +83,23 @@ class CemDetailFragment : Fragment() {
 
         binding.cemDetailToolbar.setNavigationOnClickListener {
             findNavController().navigate(R.id.homeFragment)
+        }
+
+        binding.locationChip.setOnClickListener {
+
+
+            val location = viewModel.cemeteryWithGraves.value?.cemetery?.location.toString()
+
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$location")) //query for the location since lat and long may not always be exact
+
+            intent.setPackage("com.google.android.apps.maps")
+
+            //makes sure there is an app that can satisfy the intent
+            intent.resolveActivity(packageManager!!)?.let {
+                startActivity(intent)
+
+            }
         }
 
     }

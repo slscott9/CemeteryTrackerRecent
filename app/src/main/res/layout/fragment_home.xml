@@ -8,9 +8,8 @@
         android:background="@color/grey"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
-        android:fillViewport="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_marginTop="50dp"
+        android:fillViewport="true">
 
 
         <LinearLayout

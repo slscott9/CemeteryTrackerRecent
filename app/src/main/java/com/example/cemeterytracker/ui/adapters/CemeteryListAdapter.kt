@@ -10,9 +10,6 @@ import com.example.cemeterytracker.databinding.CemListItemBinding
 
 class CemeteryListAdapter(val clickListener: CemListListener) : ListAdapter<DomainCemetery, CemeteryListAdapter.ViewHolder>(CemListDiffUtil()){
 
-
-
-
     class ViewHolder(val binding: CemListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(cemetery: DomainCemetery, clickListener: CemListListener){
             binding.cemetery = cemetery
