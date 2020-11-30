@@ -10,10 +10,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CemeteryDao {
 
+    //search cemeteries
+    @Query("select * from cemetery_tracker_table where name like '%' || :searchQuery || '%'")
+    fun getSearchedCemsList(searchQuery: String) : Flow<List<Cemetery>>
+
     //Get new cemeteries
 
     @Query("select * from cemetery_tracker_table where newCemetery =:newCem") //tested
     suspend fun getNewCemeteries(newCem: Boolean): List<CemeteryGraves>
+
+    @Query("select * from cemetery_tracker_table where addedBy =:userName")
+    fun getCemsAddedByUser(userName: String) : LiveData<List<Cemetery>>
 
 
 //get cems with graves

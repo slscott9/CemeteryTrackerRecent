@@ -12,8 +12,18 @@ class LocalDataSourceImpl @Inject constructor(
     private val dao: CemeteryDao
 ) : LocalDataSource {
 
+
+    //Search Cemeteries
+    override fun getSearchedCemsList(searchQuery: String): Flow<List<Cemetery>> {
+        return dao.getSearchedCemsList(searchQuery)
+    }
+
     override suspend fun getNewCemeteries(): List<CemeteryGraves> {
         return dao.getNewCemeteries(true)
+    }
+
+    override fun getCemsAddedByUser(userName: String): LiveData<List<Cemetery>> {
+        return dao.getCemsAddedByUser(userName)
     }
 
     //insert local cemetery

@@ -13,6 +13,7 @@ fun TextView.setGraveName(item: DomainGrave?){
     item?.let { text = "${item.firstName} ${item.lastName}" }
 }
 
+
 @BindingAdapter("setCemeteryName")
 fun TextView.setCemeteryName(domainCemetery: DomainCemetery?){
     domainCemetery?.name?.let { text = domainCemetery.name }

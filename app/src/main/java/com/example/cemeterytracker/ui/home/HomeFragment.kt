@@ -20,6 +20,7 @@ import com.example.cemeterytracker.other.Constants.KEY_PASSWORD
 import com.example.cemeterytracker.other.Constants.NO_EMAIL
 import com.example.cemeterytracker.other.Constants.NO_PASSWORD
 import com.example.cemeterytracker.ui.adapters.CemeteryListAdapter
+import com.example.cemeterytracker.ui.adapters.UserAddedCemListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_home.*
 import timber.log.Timber
@@ -35,6 +36,9 @@ class HomeFragment : Fragment() {
 
     private var currentEmail: String ? = null
     private var currentPassword: String ? = null
+
+    private lateinit var cemListAdapter: CemeteryListAdapter
+    private lateinit var userAddedCemListAdapter: UserAddedCemListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,20 +61,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cemListAdapter = CemeteryListAdapter(CemeteryListAdapter.CemListListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCemDetailFragment(it))
-        })
-
-        viewModel.allCems.observe(viewLifecycleOwner){
-            it?.let{
-                cemListAdapter.submitList(it.asDomainCemList())
-            }
-        }
-
-        binding.rvAllCems.apply {
-            adapter = cemListAdapter
-            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        }
+        setupAdapters()
+        setupObservers()
+        setupRv()
     }
 
     private fun isLoggedIn() : Boolean{
@@ -87,6 +80,40 @@ class HomeFragment : Fragment() {
 
 
         return currentEmail != NO_EMAIL && currentPassword != NO_PASSWORD
+    }
+
+    private fun setupRv() {
+        binding.rvUsersAddedCems.adapter = userAddedCemListAdapter
+
+        binding.rvAllCems.apply {
+            adapter = cemListAdapter
+            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun setupAdapters() {
+        cemListAdapter = CemeteryListAdapter(CemeteryListAdapter.CemListListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCemDetailFragment(it))
+        })
+
+        userAddedCemListAdapter = UserAddedCemListAdapter(UserAddedCemListAdapter.UserAddedCemListListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCemDetailFragment(it))
+        })
+    }
+
+    private fun setupObservers() {
+        viewModel.userAddedCemList.observe(viewLifecycleOwner){
+
+            it?.let {
+                userAddedCemListAdapter.submitList(it.asDomainCemList())
+            }
+        }
+
+        viewModel.allCems.observe(viewLifecycleOwner){
+            it?.let{
+                cemListAdapter.submitList(it.asDomainCemList())
+            }
+        }
     }
 
 

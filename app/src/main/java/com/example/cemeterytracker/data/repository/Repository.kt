@@ -20,6 +20,9 @@ interface Repository {
 
     suspend fun register(userRequest: UserRequest) : Resource<String>
 
+//search cemeteries
+
+    fun getSearchedCemsList(searchQuery: String) : Flow<List<Cemetery>>
 
 //cemetery
 
@@ -27,6 +30,9 @@ interface Repository {
 
 
     suspend fun getNewCemeteries(): List<CemeteryGraves>
+
+    fun getCemsAddedByUser(userName: String) : LiveData<List<Cemetery>>
+
 
 
     suspend fun insertCemetery(cemetery: Cemetery) : Long

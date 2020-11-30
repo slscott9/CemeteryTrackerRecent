@@ -3,6 +3,7 @@ package com.example.cemeterytracker.data.repository
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.example.cemeterytracker.data.database.CemeteryDao
 import com.example.cemeterytracker.data.database.entities.Cemetery
 import com.example.cemeterytracker.data.database.entities.CemeteryGraves
 import com.example.cemeterytracker.data.database.entities.Grave
@@ -16,6 +17,8 @@ import com.example.cemeterytracker.data.remote.RemoteDataSource
 import com.example.cemeterytracker.other.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.lang.Exception
@@ -51,8 +54,21 @@ class RepositoryImpl @Inject constructor(
         }
     }
 
+
+    //search cemeteries
+
+    override fun getSearchedCemsList(searchQuery: String): Flow<List<Cemetery>> {
+        return localDataSource.getSearchedCemsList(searchQuery)
+            .flowOn(Dispatchers.IO)
+            .conflate() // returns the latest values
+    }
+
     override suspend fun getNewCemeteries(): List<CemeteryGraves> {
         return localDataSource.getNewCemeteries()
+    }
+
+    override fun getCemsAddedByUser(userName: String): LiveData<List<Cemetery>> {
+        return localDataSource.getCemsAddedByUser(userName)
     }
 
     override fun getCemWithId(cemId: Long): LiveData<Cemetery> {

@@ -10,9 +10,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalDataSource {
 
+    //Search Cemetery
+    fun getSearchedCemsList(searchQuery: String) : Flow<List<Cemetery>>
+
 
     //Cemetery
     suspend fun getNewCemeteries(): List<CemeteryGraves>
+
+    fun getCemsAddedByUser(userName: String) : LiveData<List<Cemetery>>
+
 
 
     suspend fun insertCemetery(cemetery: Cemetery) : Long
